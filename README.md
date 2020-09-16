@@ -1,10 +1,33 @@
 # test_app
 
+Works with the local database setup
+
+Command to run:
+
+```bash
+pip install aws-sam-cli
+```
+
+Install [docker](https://docs.docker.com/engine/install/ubuntu/) and do the [postinstall](https://docs.docker.com/engine/install/linux-postinstall/)
+
+Then
+
+```bash
+sam build --use-container
+
+sam local invoke --parameter-overrides ParameterKey=DBEndpoint,ParameterValue=127.0.0.1 ParameterKey=DBName,ParameterValue=dev ParameterKey=DBUsername,ParameterValue=you_should_know_this ParameterKey=DBPassword,ParameterValue=you_should_know_this ParameterKey=SchoolSID,ParameterValue=some_sid --docker-network host
+
+```
+
+Replace the values for username/password/sid
+
+## actual documetation from aws
+
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
 - hello_world - Code for the application's Lambda function.
 - events - Invocation events that you can use to invoke the function.
-- tests - Unit tests for the application code. 
+- tests - Unit tests for the application code.
 - template.yaml - A template that defines the application's AWS resources.
 
 The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
@@ -81,6 +104,7 @@ The SAM CLI reads the application template to determine the API's routes and the
 ```
 
 ## Add a resource to your application
+
 The application template uses AWS Serverless Application Model (AWS SAM) to define application resources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources such as functions, triggers, and APIs. For resources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
 
 ## Fetch, tail, and filter Lambda function logs
